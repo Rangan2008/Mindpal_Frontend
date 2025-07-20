@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}MindPal - Career Stress{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/academic.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+<main class="dashboard">
+    <h1 style="text-align:center;">🧑‍💼 Career Stress</h1>
+    <div class="academic-stress-page">
+        <section class="stress-row"
+            style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 2rem;">
+            <div class="stress-card">
+                <h3 class="card-title">📌 Common Career Issues</h3>
+                <ul>
+                    <li>Uncertainty about future</li>
+                    <li>Pressure to choose the right path</li>
+                    <li>Job market competition</li>
+                    <li>Lack of experience</li>
+                    <li>Balancing work and study</li>
+                </ul>
+            </div>
+            <div class="stress-card">
+                <h3 class="card-title">🧠 Impact on Wellbeing</h3>
+                <ul>
+                    <li>Stress and anxiety</li>
+                    <li>Low confidence</li>
+                    <li>Fear of failure</li>
+                    <li>Procrastination</li>
+                </ul>
+            </div>
+            <div class="stress-card">
+                <h3 class="card-title">🛠️ Coping Strategies</h3>
+                <ul>
+                    <li>Seek career counseling</li>
+                    <li>Build a strong resume</li>
+                    <li>Network with professionals</li>
+                    <li>Set realistic goals</li>
+                    <li>Practice interview skills</li>
+                </ul>
+            </div>
+            <div class="stress-card-3">
+                <h3 class="card-title">🔗 Helpful Resources</h3>
+                <ul>
+                    <li><a href="https://www.linkedin.com/learning/" target="_blank">LinkedIn Learning</a></li>
+                    <li><a href="https://www.coursera.org/" target="_blank">Coursera</a></li>
+                    <li><a href="https://www.indeed.com/career-advice" target="_blank">Indeed Career Advice</a></li>
+                    <li><a href="https://www.glassdoor.com/" target="_blank">Glassdoor (Company Reviews)</a></li>
+                    <li><a href="https://www.themuse.com/" target="_blank">The Muse (Career Advice & Jobs)</a></li>
+                    <li><a href="https://zety.com/resume-builder" target="_blank">Zety Resume Builder</a></li>
+
+                </ul>
+            </div>
+            <div class="stress-card-4">
+                <h3 class="card-title">🎯 Career Planning</h3>
+                <ul>
+                    <li><strong>Research:</strong> Explore different career options and industries.</li>
+                    <li><strong>Skill Building:</strong> Take online courses to improve your skills.</li>
+                    <li><strong>Mentorship:</strong> Find a mentor for guidance and support.</li>
+                    <li><strong>Internships:</strong> Gain experience through internships or volunteering.</li>
+                    <li><strong>Work-Life Balance:</strong> Prioritize self-care and downtime.</li>
+                </ul>
+            </div>
+            <div class="stress-card-qd">
+                <h3 class="card-title">📋 Quick Career Goals</h3>
+                <textarea placeholder="Write 3 career goals for this month..." rows="4"></textarea>
+                <button onclick="alert('Goals saved!')">Save</button>
+            </div>
+        </section>
+    </div>
+    <section class="widgets-row" style="margin-top: 2rem;">
+        <div class="stress-card-4" style="flex: 1 1 100%;">
+            <h3 class="widget-title">❓ Share Your Career Concern</h3>
+            <textarea id="careerInput" placeholder="Describe your career stress or question here..."
+                rows="5"></textarea>
+            <button onclick="giveCareerAdvice()">Get Advice</button>
+            <div id="careerAdvice" class="response-box"></div>
+        </div>
+    </section>
+    <section style="margin-top: 3rem;">
+        <h2 style="text-align:center; margin-bottom: 3.5rem;">🧩 Explore Common Student Stress Topics</h2>
+        <div class="explore-section">
+            <a class="explore-card" href="{{ url_for('academic') }}">📚Academic Stress</a>
+            <a class="explore-card" href="{{ url_for('financial') }}">💸Financial Stress</a>
+            <a class="explore-card" href="{{ url_for('career') }}">🧑‍💼Career Stress</a>
+            <a class="explore-card" href="{{ url_for('time') }}">⏰Time Management</a>
+            <a class="explore-card" href="{{ url_for('pmh') }}">🧘Physical & Mental Health</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function giveCareerAdvice() {
+        const input = document.getElementById('careerInput').value.toLowerCase().trim();
+        const responseBox = document.getElementById('careerAdvice');
+
+        if (!input) {
+            responseBox.textContent = "Please describe your concern so we can help.";
+            return;
+        }
+
+        let advice = "";
+
+        if (input.includes('resume') || input.includes('cv')) {
+            advice = "Tailor your resume to each job and highlight relevant skills and experiences.";
+        } else if (input.includes('interview')) {
+            advice = "Practice common interview questions and research the company beforehand.";
+        } else if (input.includes('network')) {
+            advice = "Attend networking events and connect with professionals on LinkedIn.";
+        } else if (input.includes('skills') || input.includes('courses')) {
+            advice = "Take online courses to build in-demand skills for your field.";
+        } else {
+            advice = "Set clear goals, seek mentorship, and remember that career paths can change and evolve.";
+        }
+
+        responseBox.textContent = advice;
+    }
+</script>
+{% endblock %}

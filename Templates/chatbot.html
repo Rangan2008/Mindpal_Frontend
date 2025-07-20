@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}MindPal Chatbot{% endblock %}
+
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+/* ===== Chatbot Container ===== */
+.chatbot-container {
+    display: flex;
+    height: calc(100vh - 120px);
+    margin: 1rem;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 32px 0 rgba(230, 193, 90, 0.18), 0 2px 8px rgba(0, 0, 0, 0.18);
+    border: 2px solid rgba(230, 193, 90, 0.25);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 60%, rgba(230, 193, 90, 0.18) 100%);
+    backdrop-filter: blur(10px);
+}
+
+/* [Previous CSS styles remain exactly the same...] */
+
+/* Typing indicator */
+.typing-indicator {
+    display: flex;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin: 8px 0;
+    width: fit-content;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: #e6c15a;
+    border-radius: 50%;
+    margin: 0 3px;
+    animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingAnimation {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="chatbot-container">
+    <button id="toggle-sidebar" title="Toggle Sidebar"><i class="fas fa-bars"></i></button>
+
+    <div class="sidebar" id="sidebar">
+        <button id="new-chat-btn"><i class="fas fa-plus"></i> New Chat</button>
+        <button id="search-chat-btn"><i class="fas fa-search"></i> Search Chat</button>
+
+        <div class="chat-history">
+            <h2>Chat History</h2>
+            <ul class="chat-history-list" id="chat-history-list">
+                <!-- History entries will be loaded here -->
+            </ul>
+            <button id="export-chat-btn">
+                <i class="fas fa-download"></i> Export All
+            </button>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <h1 class="main-title">MindPal Assistant</h1>
+
+        <div class="message-area" id="messages">
+            <div class="chat-message bot">
+                Hello! I'm your MindPal assistant powered by Gemini. How can I help you today?
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your message..." class="chat-input" />
+            <div class="input-icons">
+                <button id="voice-btn" title="Voice"><i class="fas fa-microphone"></i></button>
+                <button id="send-btn" title="Send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+{% endblock %}

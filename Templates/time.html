@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}MindPal - Time Management{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/academic.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+<main class="dashboard">
+    <h1 style="text-align:center;">⏰ Time Management</h1>
+    <div class="academic-stress-page">
+        <section class="stress-row"
+            style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 2rem;">
+            <div class="stress-card">
+                <h3 class="card-title">📌 Common Time Issues</h3>
+                <ul>
+                    <li>Procrastination</li>
+                    <li>Overcommitting</li>
+                    <li>Distractions (phone, social media)</li>
+                    <li>Poor planning</li>
+                    <li>Last-minute cramming</li>
+                </ul>
+            </div>
+            <div class="stress-card">
+                <h3 class="card-title">🧠 Impact on Wellbeing</h3>
+                <ul>
+                    <li>Stress and anxiety</li>
+                    <li>Missed deadlines</li>
+                    <li>Low productivity</li>
+                    <li>Sleep deprivation</li>
+                </ul>
+            </div>
+            <div class="stress-card">
+                <h3 class="card-title">🛠️ Coping Strategies</h3>
+                <ul>
+                    <li>Use planners or digital calendars</li>
+                    <li>Set daily/weekly goals</li>
+                    <li>Prioritize important tasks</li>
+                    <li>Take regular breaks</li>
+                    <li>Limit distractions</li>
+                </ul>
+            </div>
+            <div class="stress-card-3">
+                <h3 class="card-title">🔗 Helpful Resources</h3>
+                <ul>
+                    <li><a href="https://todoist.com/" target="_blank">Todoist</a></li>
+                    <li><a href="https://www.notion.so/" target="_blank">Notion</a></li>
+                    <li><a href="https://pomofocus.io/" target="_blank">Pomofocus Timer</a></li>
+                    <li><a href="https://calendar.google.com/" target="_blank">Google Calendar</a></li>
+                    <li><a href="https://rescuetime.com/" target="_blank">RescueTime (Productivity Tracker)</a></li>
+                    <li><a href="https://habitica.com/" target="_blank">Habitica (Gamified Task Manager)</a></li>
+
+                </ul>
+            </div>
+            <div class="stress-card-4">
+                <h3 class="card-title">🎯 Time Management Tips</h3>
+                <ul>
+                    <li><strong>Pomodoro Technique:</strong> Work in focused sprints with short breaks.</li>
+                    <li><strong>Batch Tasks:</strong> Group similar tasks together to save time.</li>
+                    <li><strong>Set Boundaries:</strong> Learn to say no to non-essential commitments.</li>
+                    <li><strong>Reflect:</strong> Review your progress weekly and adjust plans.</li>
+                    <li><strong>Self-Care:</strong> Schedule downtime and rest.</li>
+                </ul>
+            </div>
+            <div class="stress-card-qd">
+                <h3 class="card-title">📋 Quick To-Do</h3>
+                <textarea placeholder="Write your top 3 tasks for today..." rows="4"></textarea>
+                <button onclick="alert('Tasks saved!')">Save</button>
+            </div>
+        </section>
+    </div>
+    <section class="widgets-row" style="margin-top: 2rem;">
+        <div class="stress-card-4" style="flex: 1 1 100%;">
+            <h3 class="widget-title">❓ Share Your Time Challenge</h3>
+            <textarea id="timeInput" placeholder="Describe your time management issue..." rows="5"></textarea>
+            <button onclick="giveTimeAdvice()">Get Advice</button>
+            <div id="timeAdvice" class="response-box"></div>
+        </div>
+    </section>
+    <section style="margin-top: 3rem;">
+        <h2 style="text-align:center; margin-bottom: 3.5rem;">🧩 Explore Common Student Stress Topics</h2>
+        <div class="explore-section">
+            <a class="explore-card" href="{{ url_for('academic') }}">📚Academic Stress</a>
+            <a class="explore-card" href="{{ url_for('financial') }}">💸Financial Stress</a>
+            <a class="explore-card" href="{{ url_for('career') }}">🧑‍💼Career Stress</a>
+            <a class="explore-card" href="{{ url_for('time') }}">⏰Time Management</a>
+            <a class="explore-card" href="{{ url_for('pmh') }}">🧘Physical & Mental Health</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function giveTimeAdvice() {
+        const input = document.getElementById('timeInput').value.toLowerCase().trim();
+        const responseBox = document.getElementById('timeAdvice');
+
+        if (!input) {
+            responseBox.textContent = "Please describe your challenge so we can help.";
+            return;
+        }
+
+        let advice = "";
+
+        if (input.includes('procrastinate') || input.includes('delay')) {
+            advice = "Try the Pomodoro Technique: 25 minutes focused work, 5 minutes break.";
+        } else if (input.includes('distraction') || input.includes('focus')) {
+            advice = "Turn off notifications and set a timer for focused work blocks.";
+        } else if (input.includes('overwhelm') || input.includes('too much')) {
+            advice = "Prioritize your top 3 tasks and break big projects into smaller steps.";
+        } else {
+            advice = "Plan your day ahead, set clear goals, and remember to take breaks!";
+        }
+
+        responseBox.textContent = advice;
+    }
+</script>
+{% endblock %}

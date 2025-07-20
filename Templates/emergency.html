@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Emergency Help - MindPal{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/full.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="twilio-notice">
+        <marquee behavior="scroll" direction="left" scrollamount="6">
+            ⚠️ Add Your Emergency Contacts to receive alerts!<strong>Note:</strong> Twilio trial accounts can only send messages to verified numbers.So verified numbers are required to receive emergency alerts.
+            <a href="https://www.twilio.com/console/phone-numbers/verified" target="_blank"
+                style="color: #fdd835; text-decoration: underline;">
+                Verify numbers here →
+            </a>
+        </marquee>
+    </div>
+
+<div class="emergency-wrapper">
+    <!-- Twilio Trial Notice -->
+    <div class="emergency-container">
+        <!-- Header Card -->
+        <div class="emergency-card header-card">
+            <div class="card-content">
+                <h1><i class="icon-alert"></i> Emergency Assistance</h1>
+                <p class="subtitle">Immediate help when you need it most</p>
+            </div>
+        </div>
+
+        <!-- Add Contact Card -->
+        <div class="emergency-card form-card">
+            <div class="card-content">
+                <div class="card-header">
+                    <i class="icon-add-contact"></i>
+                    <h3>Add Emergency Contact</h3>
+                </div>
+                <form method="POST" class="emergency-form">
+                    <div class="form-group">
+                        <label for="new_number">Phone Number:</label>
+                        <input type="text" id="new_number" name="new_number" placeholder="+91XXXXXXXXXX" required
+                            pattern="\+?\d{10,15}" title="Please enter a valid phone number">
+                    </div>
+                    <button type="submit" name="save_number" class="btn btn-primary">
+                        <i class="icon-save"></i> Save Contact
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Contacts List Card -->
+        <div class="emergency-card contacts-card">
+            <div class="card-content">
+                <div class="card-header">
+                    <i class="icon-contacts"></i>
+                    <h3>Your Emergency Contacts</h3>
+                </div>
+                <div class="contact-list">
+                    {% if contacts %}
+                    <ul class="saved-contacts">
+                        {% for contact in contacts %}
+                        <li>
+                            <span class="contact-number">{{ contact.phone_number }}</span>
+                            <form method="POST" class="inline-form">
+                                <input type="hidden" name="delete_number" value="{{ contact.phone_number }}">
+                                <button type="submit" class="btn-delete"><i class="icon-delete"></i></button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <div class="empty-state">
+                        <i class="icon-empty"></i>
+                        <p>No emergency contacts saved yet.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Panic Button Card -->
+        <div class="emergency-card panic-card">
+            <div class="card-content">
+                <form method="POST">
+                    <button type="submit" name="send_alert" class="panic-button">
+                        <i class="icon-alert"></i> SEND EMERGENCY ALERT
+                    </button>
+                    <p class="panic-note">This will notify all your emergency contacts immediately</p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="emergency-messages">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                <i class="icon-{{ category }}"></i> {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}

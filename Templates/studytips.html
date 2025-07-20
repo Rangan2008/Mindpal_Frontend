@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Study Tips - MindPal{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/studytips.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>📘 Effective Study Tips</h1>
+    <p>Smart techniques to boost your learning, focus, and productivity.</p>
+  </div>
+</section>
+
+<!-- Tips Introduction -->
+<section class="explore-summary">
+  <h3>Why Study Smart?</h3>
+  <p>Using evidence-based study techniques reduces stress and improves retention. Let’s explore!</p>
+</section>
+
+<!-- Tips Cards Section -->
+<section class="dashboard">
+  <div class="widgets-row">
+    <div class="widget">
+      <h3><i class="fa-solid fa-calendar-check"></i> Plan Your Day</h3>
+      <p>Create a to-do list and prioritize. A structured day improves efficiency and focus.</p>
+    </div>
+
+    <div class="widget">
+      <h3><i class="fa-solid fa-stopwatch"></i> Pomodoro Technique</h3>
+      <p>Study in 25-min blocks with 5-min breaks. Keeps your mind sharp and avoids burnout.</p>
+    </div>
+
+    <div class="widget">
+      <h3><i class="fa-solid fa-desk"></i> Organized Study Space</h3>
+      <p>Clean space = Clear mind. Eliminate distractions and organize essentials.</p>
+    </div>
+  </div>
+
+  <div class="widgets-row">
+    <div class="widget">
+      <h3><i class="fa-solid fa-pen-nib"></i> Take Active Notes</h3>
+      <p>Write, summarize, and use diagrams. Engage with the material, don’t just read it.</p>
+    </div>
+
+    <div class="widget">
+      <h3><i class="fa-solid fa-brain"></i> Recall & Repeat</h3>
+      <p>Practice retrieval and spaced repetition. These methods are scientifically backed for memory.</p>
+    </div>
+
+    <div class="widget">
+      <h3><i class="fa-solid fa-bed"></i> Sleep & Hydration</h3>
+      <p>Good rest and hydration are essential for focus, alertness, and long-term success.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

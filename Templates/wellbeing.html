@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}MindPal - Wellbeing{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/wellbeing.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+<main class="dashboard">
+  <h1 style="text-align:center;">🌱 Your Wellbeing Space</h1>
+
+  <section class="widgets-row">
+    <div class="widget centered-widget">
+      <h3 class="widget-title">How are you feeling?</h3>
+      <select id="mood-select">
+        <option value="😊">😊 Happy</option>
+        <option value="😟">😟 Stressed</option>
+        <option value="😐">😐 Meh</option>
+        <option value="😢">😢 Sad</option>
+        <option value="😴">😴 Tired</option>
+      </select>
+    </div>
+
+    <div class="widget">
+      <h3>Breathing Bubble</h3>
+      <div class="bubble" id="bubble"></div>
+      <button onclick="startBreathing()">Start</button>
+    </div>
+
+    <div class="widget centered-widget">
+      <h3 class="widget-title">Daily Motivation</h3>
+      <p id="daily-quote">Loading...</p>
+    </div>
+
+    <div class="widget-31">
+      <h3>Write a Quick Journal</h3>
+      <textarea placeholder="Express your thoughts here..." rows="4"></textarea>
+      <button onclick="alert('Journal submitted!')" class="Journal">Submit</button>
+    </div>
+    <div class="widget-4">
+      <h3>🧘 Self-care Tip</h3>
+      <p id="tip-display">Take a 5-minute walk outside.</p>
+      <br><br><br>
+      <button onclick="nextTip()">Next Tip</button>
+    </div>
+
+    <div class="widget-5">
+      <h3>🙏 Gratitude Count</h3>
+      <p>Things you're grateful for today:</p>
+      <h2 id="grat-count">0</h2>
+      <button onclick="incrementGratitude()">Add One</button>
+    </div>
+  </section>
+
+  <section style="margin-top: 3rem;">
+    <h2 style="text-align:center; margin-bottom: 3.5rem;">🧩 Explore Common Student Stress Topics</h2>
+    <div class="explore-section">
+      <a class="explore-card" href="{{ url_for('academic') }}">📚Academic Stress</a>
+      <a class="explore-card" href="{{ url_for('financial') }}">💸Financial Stress</a>
+      <a class="explore-card" href="{{ url_for('career') }}">🧑‍💼Career Stress</a>
+      <a class="explore-card" href="{{ url_for('time') }}">⏰Time Management</a>
+      <a class="explore-card" href="{{ url_for('pmh') }}">🧘Physical & Mental Health</a>
+
+    </div>
+  </section>
+</main>
+
+<script src="{{ url_for('static', filename='js/wellbeing.js') }}"></script>
+{% endblock %}

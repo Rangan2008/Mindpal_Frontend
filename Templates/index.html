@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}MindPal - Wellness Dashboard{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    .flash.success {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px;
+      margin: 10px auto;
+      text-align: center;
+      border-radius: 5px;
+      width: 80%;
+    }
+
+    .flash.error {
+      background-color: #f44336;
+      color: white;
+      padding: 10px;
+      margin: 10px auto;
+      text-align: center;
+      border-radius: 5px;
+      width: 80%;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>Welcome to MindPal 🌿{% if username %}, {{ username }}{% endif %}</h1>
+    <p>Your personalized digital sanctuary for stress relief.</p>
+  </div>
+</section>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="explore-summary">
+  <h3>Explore Tools</h3>
+  <p>Check out these helpful tools we have</p>
+  <div style="height: 32px;"></div> <!-- Added space between summary and section -->
+  <div class="explore-section">
+    <a href="{{ url_for('music') }}" class="explore-card" target="_blank">
+      <h4>🎧 Music Therapy</h4>
+      <p>Relax and focus with curated playlists.</p>
+    </a>
+
+    <a href="{{ url_for('studytips') }}" class="explore-card" target="_blank">
+      <h4>📘 Study Help</h4>
+      <p>Get tips and tricks for effective studying.</p>
+    </a>
+
+    <a href="{{ url_for('chat_page') }}" class="explore-card" target="_blank">
+      <h4>🤖 Talk to MindPal</h4>
+      <p>Chat with your AI mental wellness companion.</p>
+    </a>
+  </div>
+</div>
+{% endblock %}

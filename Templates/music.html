@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}MindPal - Music Therapy{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/full.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>Relax with Music 🎶</h1>
+    <p>Let soothing melodies calm your mind and lift your mood.</p>
+  </div>
+</section>
+
+<!-- Music Section -->
+<!-- English Vocal Tracks (Uploaded) -->
+<section class="dashboard">
+  <h2 style="text-align: center; margin-bottom: 1rem;">🎶 Soothing English Tracks</h2>
+  <div class="widgets-row">
+
+    <div class="widget">
+      <h3>💞 Come Closer</h3>
+      <p>Soulful cinematic background with soft vocals.</p>
+      <audio controls>
+        <source src="{{ url_for('static', filename='audio/come-closer.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="widget">
+      <h3>☁️ Dreams</h3>
+      <p>Dreamy ambient vocals for calm focus.</p>
+      <audio controls>
+        <source src="{{ url_for('static', filename='audio/dreams.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="widget">
+      <h3>🌅 End of Summer</h3>
+      <p>Gentle indie-pop for a reflective study mood.</p>
+      <audio controls>
+        <source src="{{ url_for('static', filename='audio/end-of-summer.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <div class="widgets-row">
+    <div class="widget">
+      <h3>🎧 Chasing Daylight</h3>
+      <p>Instrumental soundtrack with cinematic energy.</p>
+      <audio controls>
+        <source src="{{ url_for('static', filename='audio/chasing-daylight.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="widget">
+      <h3>🌬️ Soft Rain</h3>
+      <p>Gentle ambient rain with subtle melodies.</p>
+      <audio controls>
+        <source src="{{ url_for('static', filename='audio/soft-rain.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="widget">
+      <h3>🧘‍♂️ Meditation Flow</h3>
+      <p>Deep ambient tones for breathwork and stillness.</p>
+      <audio controls>
+        <source src="{{ url_for('static', filename='audio/meditation-003.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+</section>
+
+<!-- YouTube Music Section -->
+<section class="dashboard">
+  <h2 style="text-align: center; margin-bottom: 1rem;">🎵 YouTube Relaxation Picks</h2>
+  <div class="widgets-row">
+    <!-- Lo-Fi Study Music -->
+    <div class="widget">
+      <h3>📚 Lo-Fi for Study</h3>
+      <iframe width="100%" height="200"
+        src="https://www.youtube.com/embed/jfKfPfyJRdk"
+        title="lofi hip hop radio - beats to relax/study to"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- Meditation Music -->
+    <div class="widget">
+      <h3>🧘 Guided Meditation</h3>
+      <iframe width="100%" height="200"
+        src="https://www.youtube.com/embed/1ZYbU82GVz4"
+        title="Guided Meditation for Relaxation"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- Nature and Ocean Sounds -->
+    <div class="widget">
+      <h3>🌊 Ocean & Nature Sounds</h3>
+      <iframe width="100%" height="200"
+        src="https://www.youtube.com/embed/Mk1zL5X1V0Y"
+        title="Ocean Sounds for Sleep & Study"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="widgets-row">
+    <!-- Binaural Beats -->
+    <div class="widget">
+      <h3>🧠 Binaural Beats</h3>
+      <iframe width="100%" height="200"
+        src="https://www.youtube.com/embed/cEQf-NuYc98"
+        title="Deep Focus Binaural Beats"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- Study Piano -->
+    <div class="widget">
+      <h3>🎹 Piano Instrumentals</h3>
+      <iframe width="100%" height="200"
+        src="https://www.youtube.com/embed/tgbNymZ7vqY"
+        title="Study Piano Background Music"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- Deep Focus Synth -->
+    <div class="widget">
+      <h3>🔊 Deep Focus Synth</h3>
+      <iframe width="100%" height="200"
+        src="https://www.youtube.com/embed/e4dT8FJ2GE0"
+        title="Deep Synth Focus Music"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/music.js') }}"></script>
+<script>startBreathing();</script>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}MindPal - Academic Stress{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/academic.css') }}">
+
+<main class="dashboard">
+    <h1 style="text-align:center;">📚 Academic Stress in Students</h1>
+    <div class="academic-stress-page">
+        <!-- First Row -->
+        <section class="stress-row">
+            <div class="stress-card">
+                <h3 class="card-title">📌 Common Causes</h3>
+                <ul>
+                    <li>Exams & performance pressure</li>
+                    <li>Unrealistic expectations</li>
+                    <li>Fear of failure</li>
+                    <li>Time management issues</li>
+                    <li>Heavy workload</li>
+                </ul>
+            </div>
+
+            <div class="stress-card">
+                <h3 class="card-title">🧠 Effects on Wellbeing</h3>
+                <ul>
+                    <li>Anxiety, burnout</li>
+                    <li>Sleep issues</li>
+                    <li>Lack of motivation</li>
+                    <li>Low confidence</li>
+                </ul>
+            </div>
+
+            <div class="stress-card">
+                <h3 class="card-title">🛠️ Coping Tips</h3>
+                <ul>
+                    <li>Break study tasks into chunks</li>
+                    <li>Use planners or Pomodoro timers</li>
+                    <li>Practice deep breathing</li>
+                    <li>Talk to friends, mentors</li>
+                </ul>
+            </div>
+
+            <div class="stress-card-3">
+                <h3 class="card-title">🔗 Helpful Resources</h3>
+                <ul>
+                    <li><a href="https://www.khanacademy.org/" target="_blank">Khan Academy</a></li>
+                    <li><a href="https://www.notion.so/students" target="_blank">Notion for Students</a></li>
+                    <li><a href="https://pomofocus.io/" target="_blank">Pomofocus Timer</a></li>
+                    <li><a href="https://quizlet.com/" target="_blank">Quizlet (Study Tools)</a></li>
+                    <li><a href="https://www.coursera.org/" target="_blank">Coursera (Free Courses)</a></li>
+                    <li><a href="https://www.studysmarter.co.uk/" target="_blank">StudySmarter</a></li>
+                    <li><a href="https://www.calm.com/" target="_blank">Calm (Meditation)</a></li>
+                </ul>
+            </div>
+            <div class="stress-card-4">
+                <h3 class="card-title">🎯 Practical Solutions</h3>
+                <ul>
+                    <li><strong>Time-blocking:</strong> Assign fixed hours to study, breaks, and revision using a
+                        digital planner.</li>
+                    <li><strong>Smart Notes:</strong> Use the Cornell method or mind maps to summarize lessons
+                        efficiently.</li>
+                    <li><strong>Peer Study Groups:</strong> Join small, focused groups for shared learning and
+                        accountability.</li>
+                    <li><strong>Mock Tests:</strong> Take weekly mock exams to build confidence and reduce fear of
+                        real exams.</li>
+                    <li><strong>Ask for Help:</strong> Email teachers or attend tutorials to clarify difficult
+                        topics early.</li>
+                </ul>
+            </div>
+
+            <div class="stress-card-qd">
+                <h3 class="card-title">📋 Quick To-Do</h3>
+                <textarea placeholder="Write 3 academic goals for today..." rows="4"></textarea>
+                <button onclick="alert('Goals saved!')">Save</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- New Interactive Problem & Advice Section -->
+    <section class="widgets-row" style="margin-top: 2rem;">
+        <div class="stress-card-4" style="flex: 1 1 100%;">
+            <h3 class="widget-title">❓ Tell Us Your Problem</h3>
+            <textarea id="problemInput" placeholder="Describe your academic stress or problem here..."
+                rows="5"></textarea>
+            <button onclick="giveAdvice()">Get Advice</button>
+            <div id="adviceResponse" class="response-box"></div>
+        </div>
+    </section>
+
+    <!-- Topic Switcher -->
+    <section style="margin-top: 3rem;">
+        <h2 style="text-align:center; margin-bottom: 3.5rem;">🧩 Explore Common Student Stress Topics</h2>
+        <div class="explore-section">
+            <a class="explore-card" href="{{ url_for('academic') }}">📚Academic Stress</a>
+            <a class="explore-card" href="{{ url_for('financial') }}">💸Financial Stress</a>
+            <a class="explore-card" href="{{ url_for('career') }}">🧑‍💼Career Stress</a>
+            <a class="explore-card" href="{{ url_for('time') }}">⏰Time Management</a>
+            <a class="explore-card" href="{{ url_for('pmh') }}">🧘Physical & Mental Health</a>
+
+        </div>
+    </section>
+</main>
+
+<script>
+    function giveAdvice() {
+        const input = document.getElementById('problemInput').value.toLowerCase().trim();
+        const responseBox = document.getElementById('adviceResponse');
+
+        if (!input) {
+            responseBox.textContent = "Please describe your problem so we can help you better.";
+            return;
+        }
+
+        let advice = "";
+
+        if (input.includes('exam') || input.includes('test') || input.includes('performance')) {
+            advice = "Try breaking your study into smaller sessions and use mock tests to build confidence.";
+        } else if (input.includes('time') || input.includes('manage') || input.includes('schedule')) {
+            advice = "Consider using time-blocking techniques and planners to organize your study time effectively.";
+        } else if (input.includes('motivation') || input.includes('focus') || input.includes('distraction')) {
+            advice = "Set small goals, take short breaks, and eliminate distractions while studying to improve focus.";
+        } else if (input.includes('stress') || input.includes('anxiety') || input.includes('burnout')) {
+            advice = "Practice deep breathing exercises, mindfulness, and talk to someone you trust about your feelings.";
+        } else if (input.includes('sleep') || input.includes('rest')) {
+            advice = "Ensure you get 7-8 hours of sleep daily and avoid studying right before bedtime.";
+        } else {
+            advice = "Remember to stay organized, take breaks, and ask for help when needed. You're not alone!";
+        }
+
+        responseBox.textContent = advice;
+    }
+</script>
+{% endblock %}

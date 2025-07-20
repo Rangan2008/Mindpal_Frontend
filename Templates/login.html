@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MindPal - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo"><a href="#">🧠 MindPal</a></div>
+        <nav class="nav-links">
+            <a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="wellbeing.html"><i class="fas fa-user-md"></i> Wellbeing</a>
+            <a href="studytips.html"><i class="fa-solid fa-book"></i> Study Tips</a>
+            <a href="music.html"><i class="fa-solid fa-music"></i> Music</a>
+            <a href="register.html"fa-solid fa-user"></i> Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Login</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <form method="POST">
+                <input type="email" name="email" placeholder="Email" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <button type="submit">Login</button>
+            </form>
+            <p class="toggle-link">Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </main>
+
+    <footer class="footer">&copy; 2024 MindPal. All rights reserved.</footer>
+</body>
+</html>

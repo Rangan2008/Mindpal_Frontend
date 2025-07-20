@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}MindPal - Financial Problems{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/academic.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+<main class="dashboard">
+    <h1 style="text-align:center;">💰 Financial Problems</h1>
+    <div class="academic-stress-page">
+        <section class="stress-row"
+            style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 2rem;">
+            <div class="stress-card">
+                <h3 class="card-title">📌 Common Issues</h3>
+                <ul>
+                    <li>Tuition fees and loan debt</li>
+                    <li>High cost of textbooks</li>
+                    <li>Living expenses (rent, food)</li>
+                    <li>Lack of part-time job options</li>
+                    <li>Unexpected emergencies</li>
+                </ul>
+            </div>
+            <div class="stress-card">
+                <h3 class="card-title">🧠 Impact on Mental Health</h3>
+                <ul>
+                    <li>Stress and anxiety</li>
+                    <li>Low self-esteem</li>
+                    <li>Isolation due to lack of funds</li>
+                    <li>Dropping out or poor academic performance</li>
+                </ul>
+            </div>
+            <div class="stress-card">
+                <h3 class="card-title">🛠️ Coping Strategies</h3>
+                <ul>
+                    <li>Track your expenses with budgeting apps</li>
+                    <li>Apply for scholarships and grants</li>
+                    <li>Cook at home, avoid takeout</li>
+                    <li>Use student discounts</li>
+                    <li>Speak to a financial advisor</li>
+                </ul>
+            </div>
+            <div class="stress-card-3">
+                <h3 class="card-title">🔗 Helpful Resources</h3>
+                <ul>
+                    <li><a href="https://studentaid.gov/" target="_blank">Federal Student Aid</a></li>
+                    <li><a href="https://www.nitrocollege.com/scholarships" target="_blank">Scholarship Finder</a></li>
+                    <li><a href="https://mint.intuit.com/" target="_blank">Mint Budget App</a></li>
+                    <li><a href="https://www.budgetbytes.com/" target="_blank">Budget Bytes (Cheap Meal Ideas)</a></li>
+                    <li><a href="https://www.cashcourse.org/" target="_blank">CashCourse (Financial Education)</a></li>
+                    <li><a href="https://www.youneedabudget.com/" target="_blank">You Need A Budget (YNAB)</a></li>
+
+                </ul>
+            </div>
+            <div class="stress-card-4">
+                <h3 class="card-title">🎯 Smart Financial Habits</h3>
+                <ul>
+                    <li><strong>Create a Budget:</strong> Track income and set monthly limits.</li>
+                    <li><strong>Emergency Fund:</strong> Save a small amount each month for emergencies.</li>
+                    <li><strong>Compare Prices:</strong> Use comparison tools before major purchases.</li>
+                    <li><strong>Side Hustles:</strong> Freelance or tutor for extra cash.</li>
+                    <li><strong>Delay Non-Essentials:</strong> Prioritize needs over wants.</li>
+                </ul>
+            </div>
+            <div class="stress-card-qd">
+                <h3 class="card-title">📋 Quick Budget Plan</h3>
+                <textarea placeholder="List your top 3 monthly expenses..." rows="4"></textarea>
+                <button onclick="alert('Plan saved!')">Save</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Interactive Problem & Advice Section -->
+    <section class="widgets-row" style="margin-top: 2rem;">
+        <div class="stress-card-4" style="flex: 1 1 100%;">
+            <h3 class="widget-title">❓ Tell Us Your Problem</h3>
+            <textarea id="problemInput" placeholder="Describe your financial stress or issue here..."
+                rows="5"></textarea>
+            <button onclick="giveAdvice()">Get Advice</button>
+            <div id="adviceResponse" class="response-box"></div>
+        </div>
+    </section>
+
+    <!-- Topic Switcher -->
+    <section style="margin-top: 3rem;">
+        <h2 style="text-align:center; margin-bottom: 3.5rem;">🧩 Explore Common Student Stress Topics</h2>
+        <div class="explore-section">
+            <a class="explore-card" href="{{ url_for('academic') }}">📚Academic Stress</a>
+            <a class="explore-card" href="{{ url_for('financial') }}">💸Financial Stress</a>
+            <a class="explore-card" href="{{ url_for('career') }}">🧑‍💼Career Stress</a>
+            <a class="explore-card" href="{{ url_for('time') }}">⏰Time Management</a>
+            <a class="explore-card" href="{{ url_for('pmh') }}">🧘Physical & Mental Health</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function giveAdvice() {
+        const input = document.getElementById('problemInput').value.toLowerCase().trim();
+        const responseBox = document.getElementById('adviceResponse');
+
+        if (!input) {
+            responseBox.textContent = "Please describe your issue so we can help.";
+            return;
+        }
+
+        let advice = "";
+
+        if (input.includes('rent') || input.includes('housing') || input.includes('accommodation')) {
+            advice = "Consider finding shared housing or moving to a cheaper area. Check if your campus offers support.";
+        } else if (input.includes('debt') || input.includes('loan')) {
+            advice = "Make minimum payments consistently and look into income-driven repayment plans or refinancing options.";
+        } else if (input.includes('food') || input.includes('grocery')) {
+            advice = "Use student food banks or meal plans. Cooking in bulk can save money and time.";
+        } else if (input.includes('job') || input.includes('income') || input.includes('part-time')) {
+            advice = "Look for remote or flexible part-time jobs. Tutoring or freelancing might also fit your schedule.";
+        } else {
+            advice = "Track all spending, look for ways to cut unnecessary costs, and seek financial counseling if needed.";
+        }
+
+        responseBox.textContent = advice;
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}MindPal - Physical & Mental Health{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/academic.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+<main class="dashboard">
+  <h1 style="text-align:center;">🧘‍♀️ Physical & Mental Health</h1>
+  <div class="academic-stress-page">
+    <section class="stress-row"
+      style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 2rem;">
+      <div class="stress-card">
+        <h3 class="card-title">🏋️ Common Physical Issues</h3>
+        <ul>
+          <li>Fatigue due to lack of sleep</li>
+          <li>Back pain from prolonged sitting</li>
+          <li>Skipping meals or poor diet</li>
+          <li>Inactivity/lack of exercise</li>
+          <li>Screen time fatigue</li>
+        </ul>
+      </div>
+      <div class="stress-card">
+        <h3 class="card-title">🧠 Common Mental Health Issues</h3>
+        <ul>
+          <li>Anxiety or panic attacks</li>
+          <li>Feeling overwhelmed or isolated</li>
+          <li>Burnout and exhaustion</li>
+          <li>Lack of motivation</li>
+          <li>Imposter syndrome</li>
+        </ul>
+      </div>
+      <div class="stress-card">
+        <h3 class="card-title">🛠️ Self-Care Tips</h3>
+        <ul>
+          <li>Establish a sleep schedule</li>
+          <li>Hydrate and eat balanced meals</li>
+          <li>Take short walks or stretch breaks</li>
+          <li>Meditate or journal daily</li>
+          <li>Unplug from screens at night</li>
+        </ul>
+      </div>
+      <div class="stress-card-3">
+        <h3 class="card-title">🔗 Helpful Resources</h3>
+        <ul>
+          <li><a href="https://www.headspace.com/" target="_blank">Headspace</a></li>
+          <li><a href="https://www.myfitnesspal.com/" target="_blank">MyFitnessPal</a></li>
+          <li><a href="https://www.nimh.nih.gov/" target="_blank">Mental Health Resources</a></li>
+          <li><a href="https://www.calm.com/" target="_blank">Calm (Mindfulness & Sleep)</a></li>
+          <li><a href="https://www.betterhelp.com/" target="_blank">BetterHelp (Online Therapy)</a></li>
+          <li><a href="https://www.nutrition.org.uk/" target="_blank">British Nutrition Foundation</a></li>
+          <li><a href="https://www.sleepfoundation.org/" target="_blank">Sleep Foundation</a></li>
+        </ul>
+      </div>
+      <div class="stress-card-sfh">
+        <h3 class="card-title">💡 Healthy Habits</h3>
+        <ul>
+          <li><strong>Routine:</strong> Stick to consistent wake/sleep times</li>
+          <li><strong>Movement:</strong> Stretch every hour or walk 30 mins/day</li>
+          <li><strong>Nutrition:</strong> Eat fruits, veggies, and whole grains</li>
+          <li><strong>Rest:</strong> Allow time to relax without guilt</li>
+          <li><strong>Support:</strong> Talk to friends or a counselor</li>
+        </ul>
+      </div>
+      <div class="stress-card-qd">
+        <h3 class="card-title">📋 Health Check-In</h3>
+        <textarea placeholder="Write how you feel physically and mentally today..." rows="4"></textarea>
+        <button onclick="alert('Check-in saved!')">Save</button>
+      </div>
+    </section>
+  </div>
+  <section class="widgets-row" style="margin-top: 2rem;">
+    <div class="stress-card-4" style="flex: 1 1 100%;">
+      <h3 class="widget-title">❓ Share a Health Concern</h3>
+      <textarea id="healthInput" placeholder="What’s troubling you health-wise?" rows="5"></textarea>
+      <button onclick="giveHealthAdvice()">Get Advice</button>
+      <div id="healthResponse" class="response-box"></div>
+    </div>
+  </section>
+  <section style="margin-top: 3rem;">
+    <h2 style="text-align:center; margin-bottom: 3.5rem;">🧩 Explore Common Student Stress Topics</h2>
+    <div class="explore-section">
+      <a class="explore-card" href="{{ url_for('academic') }}">📚Academic Stress</a>
+      <a class="explore-card" href="{{ url_for('financial') }}">💸Financial Stress</a>
+      <a class="explore-card" href="{{ url_for('career') }}">🧑‍💼Career Stress</a>
+      <a class="explore-card" href="{{ url_for('time') }}">⏰Time Management</a>
+      <a class="explore-card" href="{{ url_for('pmh') }}">🧘Physical & Mental Health</a>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function giveHealthAdvice() {
+    const input = document.getElementById('healthInput').value.toLowerCase().trim();
+    const responseBox = document.getElementById('healthResponse');
+
+    if (!input) {
+      responseBox.textContent = "Please describe your concern so we can offer advice.";
+      return;
+    }
+
+    let advice = "";
+
+    if (input.includes('sleep') || input.includes('tired')) {
+      advice = "Try to maintain a consistent bedtime and avoid screens an hour before bed.";
+    } else if (input.includes('stress') || input.includes('anxiety')) {
+      advice = "Practice mindfulness, journaling, or short meditations. Also, consider speaking with a counselor.";
+    } else if (input.includes('diet') || input.includes('food') || input.includes('meal')) {
+      advice = "Plan simple, nutritious meals ahead of time and don’t skip meals during study sessions.";
+    } else if (input.includes('exercise') || input.includes('inactive')) {
+      advice = "Incorporate 20-30 minutes of walking, stretching, or home workouts into your day.";
+    } else {
+      advice = "Take time to listen to your body, rest when needed, and don’t hesitate to ask for help.";
+    }
+
+    responseBox.textContent = advice;
+  }
+</script>
+{% endblock %}
