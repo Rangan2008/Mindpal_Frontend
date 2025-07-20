@@ -1,0 +1,24 @@
+.stress-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stress-card, .stress-card-3, .stress-card-4, .stress-card-qd, .stress-card-sfh {
+  background: rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  color: #222;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media (max-width: 900px) {
+  .stress-row {
+    grid-template-columns: 1fr;
+  }
+}
